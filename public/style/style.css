@@ -1,0 +1,25 @@
+@font-face {
+    font-family: opensanshebrew;
+    src: url(../style/fonts/opensanshebrew-regular.woff);
+  }
+
+* {
+    /* direction: rtl; */
+    font-family: opensanshebrew !important;
+}
+
+.MuiTab-label-57 {
+    font-size: 22px !important;
+    font-weight: bold;
+}
+
+td {
+    text-align: right !important;
+    font-size: 15px !important;
+}
+
+th {
+    text-align: right !important;
+    font-size: 17px !important;
+    font-weight: bold !important;
+}
