@@ -6,24 +6,10 @@ const SocketManager = require('../Chat/SocketManager');
 
 var newCleanersInterval;
 var cleaningRemainderSchedule;
-
+var curIo = "";
 var on = (port, io) => {
-    
+     curIo = io; 
     registerIoEvents(io);
-
-    // if(new Date().getDay() == 6 || cleaningDutyBL.getCleaners.length == 0){
-
-    //     cleaningDutyBL.createNewCleaners();
-    // }
-
-    newCleanersInterval = setInterval(() => {
-        
-        if(new Date().getDay() == 6){
-
-            cleaningDutyBL.createNewCleaners();
-        }
-
-    }, 86400000);
 
     console.log(`api running on port ${port}`);
 }
@@ -36,19 +22,12 @@ var off = () => {
 
 var registerIoEvents = (io) => {
     
-    io.on('connection', SocketManager.onStart)
+    io.on('connection', SocketManager.onStart);
     
-    var rule = new schedule.RecurrenceRule();
-    rule.hour = 17;
-    rule.minute = 0;
-    rule.dayOfWeek = new schedule.Range(0,4);
-    
-    var cleaningRemainderSchedule = schedule.scheduleJob(rule, function() {
-        
-        io.emit("cleaningRemainder");
-        let time = new Date().getHours().toString() + " : " + new Date().getMinutes().toString();
-        console.log('cleaningRemainder: ' + time);
-    });
 }
 
-module.exports = {on,off};
+var emit = (toEmit) => {
+    curIo.emit(toEmit);
+}
+
+module.exports = {on,off,emit};

@@ -32,10 +32,11 @@ import { connect } from 'react-redux';
 
 const columnData = [
   { id: 'date', numeric: true, disablePadding: true, label: 'תאריך' },
-  { id: 'id', numeric: true, disablePadding: false, label: 'מסטב' },
-  { id: 'coordinate', numeric:false, disablePadding: false, label: 'נ.צ' },
-  { id: 'battalion', numeric: false, disablePadding: false, label: 'גדוד' },
-  { id: 'team', numeric: false, disablePadding: false, label: 'צוות' },
+  { id: 'shooterId', numeric: true, disablePadding: false, label: 'מסטב יורה' },
+  { id: 'targetId', numeric: true, disablePadding: false, label: 'מסטב מטרה' },
+  { id: 'shooterCoordinate', numeric:false, disablePadding: false, label: 'נ.צ' },
+  { id: 'shooterBattalion', numeric: false, disablePadding: false, label: 'גדוד' },
+  { id: 'shooterTeam', numeric: false, disablePadding: false, label: 'צוות' },
 ];
 
 const styles = theme => ({
@@ -267,10 +268,6 @@ class MembersTable extends React.Component {
         this.setState({ selected });
     };
 
-    handleDoubleClick = row => {
-      this.openMemberCard(row);
-    }
-
     handleClick = id => {
         const { selected } = this.state;
         const selectedIndex = selected.indexOf(id);
@@ -357,7 +354,6 @@ class MembersTable extends React.Component {
                     <TableRow
                         hover
                         onClick={() => this.handleClick(n._id)}
-                        onDoubleClick={() => this.handleDoubleClick(n)}
                         role="checkbox"
                         aria-checked={isSelected}
                         tabIndex={-1}
@@ -368,10 +364,11 @@ class MembersTable extends React.Component {
                            <Checkbox checked={isSelected} />
                         </TableCell>
                         <TableCell width="15%" padding="none">{date}</TableCell>
-                        <TableCell width="15%">{n._id}</TableCell>
-                        <TableCell width="15%">{n.coordinate.y + ' / ' + n.coordinate.x}</TableCell>
-                        <TableCell width="15%">{n.battalion}</TableCell>
-                        <TableCell width="15%">{n.team}</TableCell>    
+                        <TableCell width="15%">{n.shooter._id}</TableCell>
+                        <TableCell width="15%">{n.target._id}</TableCell>
+                        <TableCell width="15%">{n.shooter.coordinate.y + ' / ' + n.shooter.coordinate.x}</TableCell>
+                        <TableCell width="15%">{n.shooter.battaltion}</TableCell>
+                        <TableCell width="15%">{n.shooter.team}</TableCell>    
                     </TableRow>
                     );
                 })}
@@ -399,9 +396,6 @@ class MembersTable extends React.Component {
             </Table>
             </div>
         </Paper>
-        <Button onClick={(e) => this.openMemberCard()} variant="fab" className={classes.fab} color="primary">
-            <AddIcon />
-        </Button>
         <Card id="crdMember" elem={MemberCard}/> 
       </div>
     );
