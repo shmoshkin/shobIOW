@@ -105,15 +105,15 @@ class App extends React.Component {
                     fullWidth
                 >
                     <Tab className={classes.appTab} label="אירועים" component={Link} to={'/administrator'}/>
-                    <Tab label="שליטה" component={Link} to={'/'}/>
+                    <Tab label="שליטה" component={Link} to={'/control'}/>
                 </Tabs>
             </Typography>
           </Toolbar>
         </AppBar>
         <Layout/>
         <Switch>
-            <Route exact path='/' component={Home}/>
-            {/* <Route path='/servers' component={Servers}/> */}
+            <Route exact path='/control' component={control}/>
+            {/* <Route path='/' component={Servers}/> */}
             <Route path='/administrator' component={Administrator}/>
         </Switch>
       </div>
