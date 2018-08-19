@@ -49,22 +49,6 @@ class Home extends Component {
                        <QuickLinks data={ this.props.links }/>                        
                     </CardContent>
                 </Card>
-                <Card className={classes.cleaningDutyContainer}>
-                    <CardHeader
-                        
-                        avatar={
-                        <Avatar aria-label="נקיון" className={classes.avatar}>
-                            נ
-                        </Avatar>
-                        }
-
-                        title="תורנות ניקיון"
-                        subheader={week}
-                    />
-                    <CardContent>
-                        <CleaningDuty/>
-                    </CardContent>
-                </Card>
             </div>
         )
     }

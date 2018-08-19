@@ -8,8 +8,9 @@ class DB {
         var _this = this
 
         if (!this.db) {
-            MongoClient.connect('mongodb://may:1234@ds229918.mlab.com:29918/shobla', function (err, database) {
-                _this.db = database.db("shobla");
+           
+            MongoClient.connect('mongodb://shmoshkin:a1m2i3t4@ds125912.mlab.com:25912/iow', function (err, database) {
+                _this.db = database.db("iow");
             });
         }
     }

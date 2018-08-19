@@ -79,34 +79,9 @@ class Administrator extends React.Component {
     render() {  
         const { classes } = this.props;
 
-        const adminListItems = (
-            <div>
-            <ListItem button className={this.isActive('ShoblaMembers')} onClick={() => this.setState({activeTab: "ShoblaMembers"})}>
-                <ListItemIcon>
-                <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText primary="אנשי המדור" />
-            </ListItem>
-            <ListItem button className={this.isActive('ShoblaDuty')} onClick={() => this.setState({activeTab: "ShoblaDuty"})}>
-                <ListItemIcon>
-                <ManIcon />
-                </ListItemIcon>
-                <ListItemText primary="תורן שובלא" />
-            </ListItem>
-            </div>
-        );
-
         return (
         <div className={classes.root}>
             <div className={classes.appFrame}>            
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                    anchor="right">
-                    <List>{adminListItems}</List>
-                </Drawer>
                 <main id="tabContent" className={classes.content}>
                     {<ItemContent value={this.state.activeTab}/>}
                 </main>                  

@@ -31,11 +31,11 @@ import * as urls from "../constants/Urls";
 import { connect } from 'react-redux';
 
 const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'שם' },
-  { id: 'id', numeric: false, disablePadding: false, label: 'מספר אישי' },
-  { id: 'phone', numeric:false, disablePadding: false, label: 'טלפון' },
-  { id: 'crew', numeric: false, disablePadding: false, label: 'צוות' },
-  { id: 'studyDays', numeric: false, disablePadding: false, label: 'ימי לימודים' },
+  { id: 'date', numeric: true, disablePadding: true, label: 'תאריך' },
+  { id: 'id', numeric: true, disablePadding: false, label: 'מסטב' },
+  { id: 'coordinate', numeric:false, disablePadding: false, label: 'נ.צ' },
+  { id: 'battalion', numeric: false, disablePadding: false, label: 'גדוד' },
+  { id: 'team', numeric: false, disablePadding: false, label: 'צוות' },
 ];
 
 const styles = theme => ({
@@ -222,7 +222,7 @@ class MembersTable extends React.Component {
     loadMembers() {
         axios.get(urls.GET_ALL, {
           params: {
-            collection: "ShoblaMembers"
+            collection: "events"
           }
         }).then(res => {
             this.setState({ data: res.data });
@@ -351,6 +351,8 @@ class MembersTable extends React.Component {
                 <TableBody className={classes.body}>
                 {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
                     const isSelected = this.isSelected(n._id);
+                    let d = new Date(n.date);
+                    let date = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + " - " + d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
                     return (
                     <TableRow
                         hover
@@ -365,11 +367,11 @@ class MembersTable extends React.Component {
                         <TableCell width="3%" padding="checkbox">
                            <Checkbox checked={isSelected} />
                         </TableCell>
-                        <TableCell width="15%" padding="none">{n.name}</TableCell>
+                        <TableCell width="15%" padding="none">{date}</TableCell>
                         <TableCell width="15%">{n._id}</TableCell>
-                        <TableCell width="15%">{n.phone}</TableCell>
-                        <TableCell width="15%">{n.crew}</TableCell>
-                        <TableCell width="15%">{n.studyDays.join(', ')}</TableCell>    
+                        <TableCell width="15%">{n.coordinate.y + ' / ' + n.coordinate.x}</TableCell>
+                        <TableCell width="15%">{n.battalion}</TableCell>
+                        <TableCell width="15%">{n.team}</TableCell>    
                     </TableRow>
                     );
                 })}
